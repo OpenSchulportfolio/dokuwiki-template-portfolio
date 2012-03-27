@@ -4,9 +4,12 @@ if (!defined("DOKU_INC")){
     die();
 }
 // portfolio title
-$meta["sitetitle"]    = array("string"); 
-$meta["schoolname"]    = array("string"); 
-$meta["barcolor"]    = array("string"); 
+$meta["sitetitle"]    = array("string");
+$meta["schoolname"]    = array("string");
+$meta["barcolor"]    = array("string");
+//site notice
+$meta["sitenotice"]          = array("onoff");
+$meta["sitenotice_location"] = array("string");
 
 //infomail button?
 //$meta["vector_infomail"]    = array("onoff");
@@ -19,7 +22,7 @@ $meta["barcolor"]    = array("string");
 //$meta["vector_sitenotice"]          = array("onoff");
 //$meta["vector_sitenotice_location"] = array("string");
 
-$meta["winML_logout"]          = array("onoff"); 
+$meta["winML_logout"]          = array("onoff");
 $meta["winML_logout_argument"] = array("string");
 $meta["winML_hide_loginlogout"] = array("onoff");
 $meta["winML_hide_loginlogout_subnet"] = array("string");

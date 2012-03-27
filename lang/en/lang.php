@@ -35,7 +35,8 @@ if (!defined("DOKU_INC")){
 $lang["topbar_showpage"] = "Article";
 $lang["topbar_showdiscussion"] = "Discussion";
 $lang["topbar_showread"] = "Read";
-$lang["topbar_showedit"] = "Edit";
+$lang["portfolio_editpage"] = "Edit";
 $lang["topbar_showrevisions"] = "Revisions";
-$lang["topbar_showcreate"] = "Create";
+$lang["portfolio_createpage"] = "Create page";
+$lang["osp_edit_sitenotice"]    = "Edit sitenotice";
 

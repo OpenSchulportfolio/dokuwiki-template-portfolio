@@ -34,7 +34,7 @@ $showSidebar = true;
     <?php _tpl_include('meta.html') ?>
 </head>
 
-<body>
+<body <?php if ($ACT != "") { echo "class=\"". $ACT ."\""; } ?>>
     <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="dokuwiki__site"><div id="dokuwiki__top"
         class="dokuwiki site mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
@@ -58,6 +58,13 @@ $showSidebar = true;
                 <div class="page group">
                     <div id="topbar">
                         <?php _osp_topbar(); ?>
+                    </div>
+                    <div id="sitenotice">
+                        <?php
+                            $html = _osp_show_sitenotice();
+                            echo $html;
+                            tpl_flush();
+                        ?>
                     </div>
                     <?php if($conf['youarehere']): ?>
                     <div class="breadcrumbs">
