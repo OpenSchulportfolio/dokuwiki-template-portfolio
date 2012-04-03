@@ -1,0 +1,49 @@
+/* This file contains changes to the original css */
+#dokuwiki__usertools {
+    right:2em;
+    padding-right: 40px;
+}
+
+#dokuwiki__site {
+    margin: 0;
+}
+
+.dokuwiki div.page {
+    padding: 0;
+    border: 1px solid #ccc;
+}
+
+.dokuwiki div.page div.content {
+    padding: 2em;
+}
+
+/* topbar */
+
+div#topbar {
+    height: 2.6em;
+    border-bottom: 1px solid #ccc;
+    background-color: #FFAA71;
+}
+div#topbar ul {
+    list-style: none;
+    text-indent: none;
+    padding:0;
+    margin:0;
+}
+
+div#topbar ul.topbar-left {
+    float: left;
+    margin-left:1em;
+}
+
+div#topbar ul.topbar-right {
+    float: right;
+    margin-right:1em;
+}
+
+div#topbar ul li {
+    float:left;
+    padding:0.6em 0.5em;
+    margin:0;
+}
+
