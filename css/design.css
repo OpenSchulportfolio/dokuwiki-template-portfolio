@@ -61,6 +61,7 @@
 .mode_profile a.action.profile,
 .mode_recent a.action.recent,
 .mode_index a.action.index,
+.mode_media a.action.media,
 .mode_revisions a.action.revs,
 .mode_backlink a.action.backlink,
 .mode_subscribe a.action.subscribe {
@@ -283,10 +284,6 @@
 .dokuwiki div.license {
     font-size: 93.75%;
 }
-/* license note in footer */
-.dokuwiki #dokuwiki__footer div.license {
-    font-size: 100%;
-}
 
 #IE7 .dokuwiki input.button,
 #IE7 .dokuwiki button {
@@ -297,10 +294,10 @@
     margin: 0;
 }
 
-.dokuwiki #dokuwiki__content span.curid a {
+#dokuwiki__content span.curid a {
     font-weight: normal;
 }
-.dokuwiki #dokuwiki__content strong span.curid a {
+#dokuwiki__content strong span.curid a {
     font-weight: bold;
 }
 
@@ -449,15 +446,22 @@
 
 #dokuwiki__footer {
     margin-bottom: 1em;
-}
-#dokuwiki__footer .pad {
-    font-size: 0.875em;
-}
-#dokuwiki__footer div.license {
     text-align: center;
 }
-#dokuwiki__footer .license img {
-    margin: 0 .5em 0 0;
-    float: none;
+#dokuwiki__footer > .pad {
+    font-size: 0.875em;
 }
 
+#dokuwiki__footer div.license {
+    margin-bottom: 0.5em;
+    font-size: 100%;
+}
+
+#dokuwiki__footer div.buttons a img {
+    opacity: 0.5;
+}
+#dokuwiki__footer div.buttons a:hover img,
+#dokuwiki__footer div.buttons a:active img,
+#dokuwiki__footer div.buttons a:focus img {
+    opacity: 1;
+}
