@@ -24,7 +24,9 @@
 div#topbar {
     height: 2.6em;
     border-bottom: 1px solid #ccc;
-    background-color: #FFAA71;
+    background-color: #eee;
+    color: #555;
+    text-shadow: 1px 1px 0 #fff;
 }
 div#topbar ul {
     list-style: none;
@@ -57,17 +59,19 @@ div#topbar ul li.infomail {
 div#topbar form input.button {
     background: none repeat scroll 0 0 transparent;
     border: 0;
-    color: #000;
+    color: #555;
+    text-shadow: 1px 1px 0 #fff;
     box-shadow: none;
     padding: 0;
     cursor: pointer;
 }
 
 div#topbar ul li a {
-    color: black;
+    color: #555;
 }
 
 div#topbar ul li.active {
+    color: #000;
     background: #fff;
     border-bottom: 1px solid #fff;
     border-left: 1px solid #ccc;
@@ -79,4 +83,31 @@ div#sitenotice a.smalledit {
     font-size: 90%;
     float: right;
     padding-right: 1em;
+}
+/* sidebar */
+#sidebar {
+    padding: 3px;
+    width: 14em;
+    margin-top: 2em;
+    position:fixed;
+}
+#sidebar h2 {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    background: #eee;
+    padding: 3px 0 4px 4px;
+    box-shadow: 0 0 2px #999999;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+#sidebar ul {
+}
+
+#sidebar ul li {
+    padding: 2px 0 2px 0;
+}
+#sidebar ul li.active,
+#sidebar ul li.nav-active {
+    font-weight:bold;
 }

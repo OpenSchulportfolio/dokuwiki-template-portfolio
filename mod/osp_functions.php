@@ -37,33 +37,62 @@ function _osp_topbar() {
     }
 
     if (file_exists($confFile)) {
-        $topbar_items = parse_ini_file("$confFile",true);
+        $topbar_categories = parse_ini_file("$confFile",true);
     } else {
         print "Konfigurationsdatei nicht gefunden";
     }
 
-    foreach ($topbar_items as $name=>$more) {
-            $fields = explode("$separator", $more);
-            $item_type = $fields[0];
-            $item_pos = $fields[2];
+    foreach ($topbar_categories as $item_pos=>$topbar_items){
+        foreach ($topbar_items as $name=>$more) {
+                $fields = explode("$separator", $more);
+                $item_type = $fields[0];
 
-            switch ($item_type) {
-                case "link":
-                    $item_list["$item_pos"] .= _osp_get_link_item($name,$more);
-                break;
-                case "do":
-                    $item_list["$item_pos"] .= _osp_get_link_item($name,$more,"do");
-                break;
-                case "form":
-                    $item_list["$item_pos"] .= _osp_get_link_item($name,$more,"form");
-                break;
-            }
+                $item_list["$item_pos"] .= _osp_get_link_item($name,$more,$item_type);
+        }
     }
     print "<ul class=\"topbar-left\">" . $item_list["left"] . "</ul>";
     print "$ACT <ul class=\"topbar-right\">" . $item_list["right"] . "</ul>";
 
 } /* end _osp_topbar() */
 
+
+/**
+ * Read configuration for sidebar contents and output appropriate html code
+ *
+ * @author Frank Schiebel <frank@linuxmuster.net>
+ */
+function _osp_sidebar() {
+    $separator = tpl_getConf("menuconf_sepchar");
+
+    if (file_exists(DOKU_CONF."sidebar.conf")) {
+        $confFile = DOKU_CONF."sidebar.conf";
+    } else {
+        $confFile = dirname(__FILE__).'/../conf/'."sidebar.conf";
+    }
+
+    if (file_exists($confFile)) {
+        $sidebar_categories = parse_ini_file("$confFile",true);
+    } else {
+        print "Konfigurationsdatei nicht gefunden";
+    }
+
+    $html = "<div id=\"sidebar\">";
+
+    foreach ($sidebar_categories as $item_cat=>$sidebar_items){
+        $heading_text = $sidebar_categories[$item_cat]["heading"];
+        foreach ($sidebar_items as $name=>$more) {
+                $fields = explode("$separator", $more);
+                $item_type = $fields[0];
+
+                $item_list["$item_cat"] .= _osp_get_link_item($name,$more,$item_type);
+        }
+    $html .= "<h2>" . $heading_text . "</h2>";
+    $html .="<ul>" . $item_list["$item_cat"] . "</ul>";
+    }
+    $html .= "</div>";
+    print $html;
+
+}
 
 /**
  * get link list-item to a wiki page or external resource
@@ -75,14 +104,15 @@ function _osp_get_link_item($name,$args,$type="link") {
     global $lang;
     global $ACT;
 
-    $fields = explode(">", $args);
+    $separator = tpl_getConf("menuconf_sepchar");
+    $fields = explode("$separator", $args);
 
     $plugin_req = $fields[1];
     if ($plugin_req != "none" && plugin_isdisabled("$plugin_req")) {
         return;
     }
 
-    $command = $fields[3];
+    $command = $fields[2];
     $command_def = _check_command($name,$command);
     $name = $command_def[0];
     $command = $command_def[1];
@@ -98,15 +128,15 @@ function _osp_get_link_item($name,$args,$type="link") {
         }
     } elseif ($type == "link") {
         if ($command == "page") {
-            $target_page = $fields[4];
+            $target_page = $fields[3];
             if ($target_page == "id") {
                 $link = wl(cleanID($ID));
                 if ($ACT == "show") {
                     $class = " class=\"active\"";
                 }
             } else {
-                $link = wl(cleanID($fields[4]));
-                if (cleanID($fields[4]) == cleanID(getID())) {
+                $link = wl(cleanID($fields[3]));
+                if (cleanID($fields[3]) == cleanID(getID())) {
                     $class = " class=\"nav-active\"";
                 }
             }

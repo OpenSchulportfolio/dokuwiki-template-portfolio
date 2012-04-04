@@ -48,7 +48,7 @@ $showSidebar = true;
                 <div id="dokuwiki__aside"><div class="pad include group">
                     <?php tpl_flush() ?>
                     <?php _tpl_include('sidebarheader.html') ?>
-                    <?php tpl_include_page($conf['sidebar']) ?>
+                    <?php _osp_sidebar() ?>
                     <?php _tpl_include('sidebarfooter.html') ?>
                 </div></div><!-- /aside -->
             <?php endif; ?>

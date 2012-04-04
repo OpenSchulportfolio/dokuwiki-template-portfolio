@@ -7,7 +7,7 @@ $conf["barcolor"]    = "#FFE28A";
 //site notice
 $conf["sitenotice"]          = true; //TRUE: use/show sitenotice
 $conf["sitenotice_location"] = ":allusers:topmenu"; //page/article used to store the sitenotice
-$conf["menuconf_sepchar"]    = ">";
+$conf["menuconf_sepchar"]    = ":::";
 
 //$conf["infomail"]    = array("onoff");
 
