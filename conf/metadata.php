@@ -10,6 +10,7 @@ $meta["barcolor"]    = array("string");
 //site notice
 $meta["sitenotice"]          = array("onoff");
 $meta["sitenotice_location"] = array("string");
+$meta["menuconf_sepchar"]    = array("string");
 
 //infomail button?
 //$meta["vector_infomail"]    = array("onoff");

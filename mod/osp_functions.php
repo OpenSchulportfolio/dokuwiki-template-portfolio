@@ -11,14 +11,12 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-// get needed language array
+// get language array
 include DOKU_TPLINC."lang/en/lang.php";
 // overwrite english language values with available translations
 if (!empty($conf["lang"]) &&
     $conf["lang"] !== "en" &&
     file_exists(DOKU_TPLINC."/lang/".$conf["lang"]."/lang.php")){
-    //get language file (partially translated language files are no problem
-    //cause non translated stuff is still existing as English array value)
     include DOKU_TPLINC."/lang/".$conf["lang"]."/lang.php";
 }
 
@@ -29,6 +27,8 @@ if (!empty($conf["lang"]) &&
  * @author Frank Schiebel <frank@linuxmuster.net>
  */
 function _osp_topbar() {
+
+    $separator = tpl_getConf("menuconf_sepchar");
 
     if (file_exists(DOKU_CONF."topbar.conf")) {
         $confFile = DOKU_CONF."topbar.conf";
@@ -43,7 +43,7 @@ function _osp_topbar() {
     }
 
     foreach ($topbar_items as $name=>$more) {
-            $fields = explode(">", $more);
+            $fields = explode("$separator", $more);
             $item_type = $fields[0];
             $item_pos = $fields[2];
 
@@ -55,6 +55,7 @@ function _osp_topbar() {
                     $item_list["$item_pos"] .= _osp_get_link_item($name,$more,"do");
                 break;
                 case "form":
+                    $item_list["$item_pos"] .= _osp_get_link_item($name,$more,"form");
                 break;
             }
     }
@@ -75,6 +76,12 @@ function _osp_get_link_item($name,$args,$type="link") {
     global $ACT;
 
     $fields = explode(">", $args);
+
+    $plugin_req = $fields[1];
+    if ($plugin_req != "none" && plugin_isdisabled("$plugin_req")) {
+        return;
+    }
+
     $command = $fields[3];
     $command_def = _check_command($name,$command);
     $name = $command_def[0];
@@ -89,7 +96,7 @@ function _osp_get_link_item($name,$args,$type="link") {
         } else {
             return "";
         }
-    } else {
+    } elseif ($type == "link") {
         if ($command == "page") {
             $target_page = $fields[4];
             if ($target_page == "id") {
@@ -104,7 +111,18 @@ function _osp_get_link_item($name,$args,$type="link") {
                 }
             }
         }
+    } elseif ($type == "form") {
+            if ($command == "infomail") {
+                $form  = "<form class=\"button btn_infomail\" action=\"";
+                $form .= wl(cleanID($ID)) ."\" method=\"get\">";
+                $form .= "<input type=\"hidden\" value=\"infomail\" name=\"do\">";
+                $form .= "<input type=\"hidden\" value=\"".cleanID($ID)."\" name=\"id\">";
+                $form .= "<input class=\"button\" type=\"submit\" title=\"".$lang["osp_infomail"]."\" value=\"Infomail\">";
+                $form .= "</form>";
+                return "<li class=\"infomail\">". $form . "</li>\n";
+            }
     }
+
     if ($lang[$name] != "" ) {
         $displayname = $lang[$name];
     } else {
@@ -131,11 +149,11 @@ function _check_command($name,$command) {
                 return $command_def;
             }
             if(!empty($INFO["exists"])){
-                $command_def[]="portfolio_editpage";
+                $command_def[]="osp_editpage";
                 $command_def[]="edit";
                 return $command_def;
             } else {
-                $command_def[]="portfolio_createpage";
+                $command_def[]="osp_createpage";
                 $command_def[]="edit";
                 return $command_def;
             }

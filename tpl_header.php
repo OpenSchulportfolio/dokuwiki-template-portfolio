@@ -10,19 +10,14 @@
         </ul>
 
         <h1><?php
-            // get logo either out of the template images folder or data/media folder
-            $logoSize = array();
-            //$logo = tpl_getMediaFile(array(':wiki:logo.png', 'images/logo.png'), false, $logoSize);
-
-            // display logo and wiki title in a link to the home page
             tpl_link(
                 wl(),
-                '<img src="'.$logo.'" '.$logoSize[3].' alt="" /> <span>'.$conf['title'].'</span>',
+                '<span>'.tpl_getConf('sitetitle').'</span>',
                 'accesskey="h" title="[H]"'
             );
         ?></h1>
-        <?php if ($conf['tagline']): ?>
-            <p class="claim"><?php echo $conf['tagline']; ?></p>
+        <?php if (tpl_getConf('schoolname')): ?>
+            <p class="claim"><?php echo tpl_getConf('schoolname'); ?></p>
         <?php endif ?>
     </div>
 

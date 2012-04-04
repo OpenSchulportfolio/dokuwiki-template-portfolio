@@ -3,26 +3,7 @@
 /**
  * English language for the "vector" DokuWiki template
  *
- * If your language is not/only partially translated or you found an error/typo,
- * have a look at the following files:
- * - "/lib/tpl/vector/lang/<your lang>/lang.php"
- * - "/lib/tpl/vector/lang/<your lang>/settings.php"
- * If they are not existing, copy and translate the English ones (hint: looking
- * at <http://[your lang].wikipedia.org> might be helpful). And don't forget to
- * mail the translation to me,
- * Andreas Haerter <andreas.haerter@dev.mail-node.com>. Thanks :-D.
- *
- *
- * LICENSE: This file is open source software (OSS) and may be copied under
- *          certain conditions. See COPYING file for details or try to contact
- *          the author(s) of this file in doubt.
- *
  * @license GPLv2 (http://www.gnu.org/licenses/gpl2.html)
- * @author Andreas Haerter <andreas.haerter@dev.mail-node.com>
- * @link http://andreas-haerter.com/projects/dokuwiki-template-vector
- * @link http://www.dokuwiki.org/template:vector
- * @link http://www.dokuwiki.org/config:lang
- * @link http://www.dokuwiki.org/devel:configuration
  */
 
 
@@ -32,11 +13,12 @@ if (!defined("DOKU_INC")){
 }
 
 //tabs, personal tools and special links
-$lang["topbar_showpage"] = "Article";
-$lang["topbar_showdiscussion"] = "Discussion";
-$lang["topbar_showread"] = "Read";
-$lang["portfolio_editpage"] = "Edit";
-$lang["topbar_showrevisions"] = "Revisions";
-$lang["portfolio_createpage"] = "Create page";
+$lang["osp_showpage"] = "Article";
+$lang["osp_discussion"] = "Discussion";
+$lang["osp_infomail"] = "Infomail";
+$lang["osp_readpage"] = "Read";
+$lang["osp_editpage"] = "Edit";
+$lang["osp_showrevisions"] = "Revisions";
+$lang["osp_createpage"] = "Create page";
 $lang["osp_edit_sitenotice"]    = "Edit sitenotice";
 
