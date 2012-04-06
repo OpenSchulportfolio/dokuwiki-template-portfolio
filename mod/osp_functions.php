@@ -71,9 +71,13 @@ function _osp_topbar() {
 function _osp_sidebar() {
     global $lang;
 
+    $html = "<div id=\"sidebar\">";
+
     if (tpl_getConf('closedwiki') &&
         !isset($_SERVER["REMOTE_USER"])) {
-            print $lang["osp_closed_sidebar_msg"];
+            $html .= "<h2>" . $lang["osp_closed_sidebar_msg"] ."</h2>";
+            $html .= "</div>";
+            print $html;
             return;
     }
 
@@ -91,7 +95,6 @@ function _osp_sidebar() {
         print "Konfigurationsdatei nicht gefunden";
     }
 
-    $html = "<div id=\"sidebar\">";
 
     foreach ($sidebar_categories as $item_cat=>$sidebar_items){
         $heading_text = $sidebar_categories[$item_cat]["heading"];
@@ -203,7 +206,7 @@ function _check_command($name,$command) {
                 return $command_def;
             }
         } else {
-                $command_def[]="source";
+                $command_def[]="btn_source";
                 $command_def[]="edit";
                 return $command_def;
         }
@@ -267,4 +270,23 @@ function _osp_show_sitenotice() {
 function _osp_csslink() {
     $link =  "<link rel=\"stylesheet\" media=\"all\" type=\"text/css\" href=\"" . DOKU_TPL."exe/css.php". "\" />\n";
     print $link;
+}
+
+function _osp_get_logopic () {
+    global $conf;
+
+    $html = "<a href=\"".wl()."\"><img src=\"";
+
+    if (file_exists($conf['savedir']."/media/wiki/logo/logo.png")) {
+          //user defined PNG as Media upload
+          $html .=  DOKU_URL."/lib/exe/fetch.php?media=wiki:logo:logo.png";
+      } elseif (file_exists($conf['savedir']."/media/wiki/logo/logo.jpg")) {
+          $html .=  DOKU_URL."/lib/exe/fetch.php?media=wiki:logo:logo.jpg";
+      } elseif (file_exists($conf['savedir']."/media/wiki/logo/logo.gif")) {
+          $html .=  DOKU_URL."/lib/exe/fetch.php?media=wiki:logo:logo.gif";
+      } else {
+          $html .= DOKU_TPL."images/logo.png";
+      }
+    $html .=  "\" /></a>\n";
+    print $html;
 }

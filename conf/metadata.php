@@ -8,7 +8,8 @@ $meta["sitetitle"]    = array("string");
 $meta["schoolname"]    = array("string");
 $meta["css_barcolor"]    = array("string");
 $meta["css_sbhcolor"]  = array("string");
-$meta["css_titlepadleft"] = array("string");
+$meta["css_titleleftmargin"] = array("string");
+$meta["css_sidebartopmargin"] = array("string");
 $meta["css_sidebarpos"] = array("string");
 //site notice
 $meta["sitenotice"]          = array("onoff");

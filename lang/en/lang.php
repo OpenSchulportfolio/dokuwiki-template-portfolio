@@ -32,3 +32,4 @@ $lang["osp_recent"] = "Last changes";
 $lang["osp_index"] = "Page index";
 $lang["osp_closed_sidebar_msg"] = "Please login.";
 
+

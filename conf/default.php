@@ -5,7 +5,8 @@ $conf["sitetitle"]     = "Schulportfolio"; //TRUE: use/show user pages
 $conf["schoolname"]    = "Schulname hier eintragen"; //TRUE: use/show user pages
 $conf["css_barcolor"]   = "#FFE28A";
 $conf["css_sbhcolor"]  = "#FFE28A";
-$conf["css_titlepadleft"] = "14em";
+$conf["css_titleleftmargin"] = "14em";
+$conf["css_sidebartopmargin"] = "3em";
 $conf["css_sidebarpos"] = "relative";
 //site notice
 $conf["sitenotice"]          = true; //TRUE: use/show sitenotice

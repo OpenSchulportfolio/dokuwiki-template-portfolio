@@ -8,6 +8,9 @@
         <ul class="a11y skip">
             <li><a href="#dokuwiki__content"><?php echo $lang['skip_to_content']; ?></a></li>
         </ul>
+        <div id="sitelogo">
+        <?php _osp_get_logopic() ?>
+        </div>
         <div id="titlebox">
         <h1><?php
             tpl_link(

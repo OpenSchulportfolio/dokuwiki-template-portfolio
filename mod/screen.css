@@ -2,13 +2,29 @@
 
 div#titlebox
 {
-    margin-left: __css_titlepadleft__;
+    margin-left: __css_titleleftmargin__;
+}
+
+div#sitelogo {
+    position: absolute;
+    top: 1em;
+    left: 2em;
+    width:  __css_titleleftmargin__;
+    z-index: 2;
+}
+div#sitelogo a {
+    display:block;
+    text-decoration: none;
+    text-align: center;
+}
+div#sitelogo a img {
+    border:0;
+    padding:0;
 }
 
 #dokuwiki__header {
     padding-bottom:0;
 }
-
 
 #dokuwiki__header .headings {
     margin-top: -1.8em;
@@ -100,7 +116,7 @@ div#sitenotice a.smalledit {
 #sidebar {
     padding: 3px;
     width: 14em;
-    margin-top: 2em;
+    margin-top: __css_sidebartopmargin__;
     position: __css_sidebarpos__;
 }
 #sidebar h2 {
