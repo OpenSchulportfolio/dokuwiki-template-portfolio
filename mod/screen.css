@@ -1,6 +1,17 @@
 /* This file contains changes to the original css */
+
+div#titlebox
+{
+    margin-left: __css_titlepadleft__;
+}
+
 #dokuwiki__header {
     padding-bottom:0;
+}
+
+
+#dokuwiki__header .headings {
+    margin-top: -1.8em;
 }
 #dokuwiki__usertools {
     right:2em;
@@ -20,11 +31,12 @@
     padding: 2em;
 }
 
+
 /* topbar */
 div#topbar {
     height: 2.6em;
     border-bottom: 1px solid #ccc;
-    background-color: #eee;
+    background-color: __css_barcolor__;
     color: #555;
     text-shadow: 1px 1px 0 #fff;
 }
@@ -89,13 +101,13 @@ div#sitenotice a.smalledit {
     padding: 3px;
     width: 14em;
     margin-top: 2em;
-    position:fixed;
+    position: __css_sidebarpos__;
 }
 #sidebar h2 {
     font-size: 1.1em;
     font-weight: bold;
     color: #555;
-    background: #eee;
+    background: __css_sbhcolor__;
     padding: 3px 0 4px 4px;
     box-shadow: 0 0 2px #999999;
     text-shadow: 1px 1px 0 #fff;

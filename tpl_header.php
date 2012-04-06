@@ -8,7 +8,7 @@
         <ul class="a11y skip">
             <li><a href="#dokuwiki__content"><?php echo $lang['skip_to_content']; ?></a></li>
         </ul>
-
+        <div id="titlebox">
         <h1><?php
             tpl_link(
                 wl(),
@@ -19,6 +19,7 @@
         <?php if (tpl_getConf('schoolname')): ?>
             <p class="claim"><?php echo tpl_getConf('schoolname'); ?></p>
         <?php endif ?>
+        </div>
     </div>
 
     <div class="tools group">
@@ -49,6 +50,7 @@
             <div class="mobileTools">
                 <?php tpl_actiondropdown($lang['tools']); ?>
             </div>
+            <?php if (tpl_getConf('toolstopleft')): ?>
             <ul>
                 <?php
                     tpl_action('recent', 1, 'li');
@@ -56,6 +58,7 @@
                     tpl_action('index', 1, 'li');
                 ?>
             </ul>
+            <?php endif ?>
         </div>
 
     </div>

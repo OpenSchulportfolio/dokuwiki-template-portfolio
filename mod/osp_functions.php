@@ -28,6 +28,13 @@ if (!empty($conf["lang"]) &&
  */
 function _osp_topbar() {
 
+    global $lang;
+
+    if (tpl_getConf('closedwiki') &&
+        !isset($_SERVER["REMOTE_USER"])) {
+            return;
+    }
+
     $separator = tpl_getConf("menuconf_sepchar");
 
     if (file_exists(DOKU_CONF."topbar.conf")) {
@@ -62,6 +69,14 @@ function _osp_topbar() {
  * @author Frank Schiebel <frank@linuxmuster.net>
  */
 function _osp_sidebar() {
+    global $lang;
+
+    if (tpl_getConf('closedwiki') &&
+        !isset($_SERVER["REMOTE_USER"])) {
+            print $lang["osp_closed_sidebar_msg"];
+            return;
+    }
+
     $separator = tpl_getConf("menuconf_sepchar");
 
     if (file_exists(DOKU_CONF."sidebar.conf")) {
@@ -242,4 +257,14 @@ function _osp_show_sitenotice() {
     }
     return $html;
 
+}
+
+/**
+ * print sitenotice
+ *
+ * @author Frank Schiebel <frank@linuxmuster.net>
+ */
+function _osp_csslink() {
+    $link =  "<link rel=\"stylesheet\" media=\"all\" type=\"text/css\" href=\"" . DOKU_TPL."exe/css.php". "\" />\n";
+    print $link;
 }

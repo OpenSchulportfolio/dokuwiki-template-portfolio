@@ -1,11 +1,15 @@
 <?php
 
 // portfolio title
-$conf["sitetitle"]    = "Schulportfolio"; //TRUE: use/show user pages
+$conf["sitetitle"]     = "Schulportfolio"; //TRUE: use/show user pages
 $conf["schoolname"]    = "Schulname hier eintragen"; //TRUE: use/show user pages
-$conf["barcolor"]    = "#FFE28A";
+$conf["css_barcolor"]   = "#FFE28A";
+$conf["css_sbhcolor"]  = "#FFE28A";
+$conf["css_titlepadleft"] = "14em";
+$conf["css_sidebarpos"] = "relative";
 //site notice
 $conf["sitenotice"]          = true; //TRUE: use/show sitenotice
+$conf["toolstopleft"]        = true;
 $conf["sitenotice_location"] = ":allusers:topmenu"; //page/article used to store the sitenotice
 $conf["menuconf_sepchar"]    = ":::";
 

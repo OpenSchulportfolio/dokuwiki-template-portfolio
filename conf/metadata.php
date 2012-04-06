@@ -6,9 +6,13 @@ if (!defined("DOKU_INC")){
 // portfolio title
 $meta["sitetitle"]    = array("string");
 $meta["schoolname"]    = array("string");
-$meta["barcolor"]    = array("string");
+$meta["css_barcolor"]    = array("string");
+$meta["css_sbhcolor"]  = array("string");
+$meta["css_titlepadleft"] = array("string");
+$meta["css_sidebarpos"] = array("string");
 //site notice
 $meta["sitenotice"]          = array("onoff");
+$meta["toolstopleft"]        = array("onoff");
 $meta["sitenotice_location"] = array("string");
 $meta["menuconf_sepchar"]    = array("string");
 
