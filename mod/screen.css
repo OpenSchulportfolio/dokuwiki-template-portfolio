@@ -105,19 +105,49 @@ div#topbar ul li.active {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
-/* sitenotice */
-div#sitenotice a.smalledit {
-    color: #999;
-    font-size: 90%;
-    float: right;
-    padding-right: 1em;
+
+div.youarehere {
+    margin: 0 1em 0 1em;
+    padding: 3px;
+    font-size: 0.876em;
+    color: #555;
+    border: 1px solid #dedede;
 }
+/* sitenotice */
+div.include_edit {
+    overflow: hidden;
+    position: relative;
+    padding: 3px;
+}
+div.include_edit a.editlink {
+    display:inline;
+    border: 1px solid #aaa;
+    background-color: #ccc !important;
+    padding: 2px;
+    font-size: 10px;
+    color: #555 !important;
+    text-shadow: 1px 1px 0 #fff;
+    box-shadow: 0 0 2px #999999;
+    position: absolute;
+    right: -99999em;
+}
+div.include_edit:hover a.editlink {
+    display: inline;
+    position:absolute;
+    right: 4px;
+    bottom: 4px;
+
+}
+
 /* sidebar */
 #sidebar {
-    padding: 3px;
+    padding: 0;
     width: 14em;
     margin-top: __css_sidebartopmargin__;
     position: __css_sidebarpos__;
+}
+#sidebar .sidebarblock {
+    padding: 3px;
 }
 #sidebar h2 {
     font-size: 1.1em;
@@ -138,4 +168,10 @@ div#sitenotice a.smalledit {
 #sidebar ul li.active,
 #sidebar ul li.nav-active {
     font-weight:bold;
+}
+
+/* Tags plugin modifications */
+div#dokuwiki__content div.content div.tags {
+    clear: none;
+    border: none;
 }

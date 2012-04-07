@@ -97,18 +97,57 @@ function _osp_sidebar() {
 
 
     foreach ($sidebar_categories as $item_cat=>$sidebar_items){
+        $include_html = "";
         $heading_text = $sidebar_categories[$item_cat]["heading"];
         foreach ($sidebar_items as $name=>$more) {
                 $fields = explode("$separator", $more);
                 $item_type = $fields[0];
-
-                $item_list["$item_cat"] .= _osp_get_link_item($name,$more,$item_type);
+                if ($name == "include") {
+                    $include_html .= _osp_include_sidebar_page($more);
+                } elseif ($name == "ini") {
+                } else {
+                    $item_list["$item_cat"] .= _osp_get_link_item($name,$more,$item_type);
+                }
         }
-    $html .= "<h2>" . $heading_text . "</h2>";
+    $html .= "<div class=\"sidebarblock\"><h2>" . $heading_text . "</h2>";
+    if ($include_html !== "" ) {
+        $html .= "</div>". $include_html ."<div class=\"sidebarblock\">";
+    }
     $html .="<ul>" . $item_list["$item_cat"] . "</ul>";
+    $html .= "</div>";
     }
     $html .= "</div>";
     print $html;
+
+}
+
+/**
+ * include page in sidebar
+ *
+ * @author Frank Schiebel <frank@linuxmuster.net>
+ */
+function _osp_include_sidebar_page($more) {
+    global $lang;
+    $page_id = cleanID($more);
+    if (!empty($conf["useacl"]) && auth_quickaclcheck($page_id) < AUTH_READ) {
+        return;
+    }
+    $html = "<div class=\"include_edit\">";
+    $html .= tpl_include_page($page_id, false);
+
+    if ($html === "" || $html === false) {
+#        echo "[&#160;";
+#              tpl_pagelink(tpl_getConf("vector_sitenotice_location"), hsc($lang["vector_fillplaceholder"]." (".tpl_getConf("vector_sitenotice_location").")"));
+#              echo "&#160;]<br />";
+    } else {
+        if (auth_quickaclcheck($page_id) > AUTH_READ) {
+            $link = wl($page_id, array("do"=>"edit"));
+            $html .= "<a class=\"editlink\" href=\"". $link . "\">". $lang["osp_edit_sitenotice"] . "</a>";
+        }
+
+    }
+    $html .= "</div>";
+    return $html;
 
 }
 
@@ -163,11 +202,18 @@ function _osp_get_link_item($name,$args,$type="link") {
             if ($command == "infomail") {
                 $form  = "<form class=\"button btn_infomail\" action=\"";
                 $form .= wl(cleanID($ID)) ."\" method=\"get\">";
-                $form .= "<input type=\"hidden\" value=\"infomail\" name=\"do\">";
-                $form .= "<input type=\"hidden\" value=\"".cleanID($ID)."\" name=\"id\">";
-                $form .= "<input class=\"button\" type=\"submit\" title=\"".$lang["osp_infomail"]."\" value=\"Infomail\">";
+                $form .= "<input type=\"hidden\" value=\"infomail\" name=\"do\" />";
+                $form .= "<input type=\"hidden\" value=\"".cleanID($ID)."\" name=\"id\" />";
+                $form .= "<input class=\"button\" type=\"submit\" title=\"".$lang["osp_infomail"]."\" value=\"Infomail\" />";
                 $form .= "</form>";
                 return "<li class=\"infomail\">". $form . "</li>\n";
+            }
+            if ($command == "shorturl") {
+                if (!plugin_isdisabled("shorturl") && auth_quickaclcheck(cleanID(getID())) >= AUTH_READ){
+                $shorturl =& plugin_load('helper', 'shorturl');
+                return "<li" . $class .">". $shorturl->shorturlPrintLink(getID()) ."</li>\n";
+                }
+
             }
     }
 
@@ -245,7 +291,8 @@ function _osp_show_sitenotice() {
     }
 
     //get the rendered content of the defined wiki article to use as sitenotice.
-    $html = tpl_include_page($sitenotice_page_id, false);
+    $html = "<div class=\"include_edit\">";
+    $html .= tpl_include_page($sitenotice_page_id, false);
     if ($html === "" || $html === false){
         //show creation/edit link if the defined page got no content
         echo "[&#160;";
@@ -254,10 +301,11 @@ function _osp_show_sitenotice() {
     } else {
         if (auth_quickaclcheck($sitenotice_page_id) > AUTH_READ) {
             $link = wl($sitenotice_page_id, array("do"=>"edit"));
-            $html .= "<a href=\"". $link . "\" class=\"smalledit\">". $lang["osp_edit_sitenotice"] . "</a>\n";
+            $html .= "<a href=\"". $link . "\" class=\"editlink\">". $lang["osp_edit_sitenotice"] . "</a>\n";
         }
 
     }
+    $html .= "</div>";
     return $html;
 
 }

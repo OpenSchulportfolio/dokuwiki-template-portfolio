@@ -69,9 +69,7 @@ $showSidebar = true;
                         ?>
                     </div>
                     <?php if($conf['youarehere']): ?>
-                    <div class="breadcrumbs">
                         <div class="youarehere"><?php tpl_youarehere() ?></div>
-                    </div>
                     <?php endif ?>
                     <div class="content">
                         <?php tpl_flush() ?>
