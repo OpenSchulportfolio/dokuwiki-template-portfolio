@@ -1,36 +1,49 @@
 <?php
+/**
+ * Types of the different option values for the "portfolio2" DokuWiki template
+ */
+
+
 //check if we are running within the DokuWiki environment
 if (!defined("DOKU_INC")){
     die();
 }
 // portfolio title
-$meta["sitetitle"]    = array("string");
-$meta["schoolname"]    = array("string");
-$meta["css_barcolor"]    = array("string");
-$meta["css_sbhcolor"]  = array("string");
-$meta["css_titleleftmargin"] = array("string");
-$meta["css_sidebartopmargin"] = array("string");
-$meta["css_sidebarpos"] = array("string");
-//site notice
-$meta["sitenotice"]          = array("onoff");
-$meta["toolstopleft"]        = array("onoff");
-$meta["sitenotice_location"] = array("string");
-$meta["menuconf_sepchar"]    = array("string");
+$meta["sitetitle"]    = array("string"); 
+$meta["schoolname"]    = array("string"); 
+$meta["closedwiki"]     = array("onoff");
+
+//ns search
+$meta["searchnamespaces"] = array("string");
+
+//user pages
+$meta["userpage"]    = array("onoff");
+$meta["userpage_ns"] = array("string", "_pattern" => "/^:.{1,}:$/");
 
 //infomail button?
-//$meta["vector_infomail"]    = array("onoff");
+$meta["infomail"]    = array("onoff");
 
 //discussion pages
-//$meta["discussion"]    = array("onoff");
-//$meta["discussion_namespace"] = array("string", "_pattern" => "/^:.{1,}:$/");
+$meta["discuss"]    = array("onoff");
+$meta["discuss_ns"] = array("string", "_pattern" => "/^:.{1,}:$/");
 
-//site notice
-//$meta["vector_sitenotice"]          = array("onoff");
-//$meta["vector_sitenotice_location"] = array("string");
+//topmenu
+$meta["topmenu"]          = array("onoff");
+$meta["topmenu_page"] = array("string");
 
-$meta["winML_logout"]          = array("onoff");
+//navigation
+$meta["sidebar"]          = array("onoff");
+$meta["sidebar_page"] = array("string");
+
+//exportbox ("print/export")
+$meta["exportbox"]          = array("onoff");
+$meta["print_new_window"]   = array("onoff");
+
+//toolbox
+$meta["toolbox"]          = array("onoff");
+
+$meta["winML_logout"]          = array("onoff"); 
 $meta["winML_logout_argument"] = array("string");
 $meta["winML_hide_loginlogout"] = array("onoff");
 $meta["winML_hide_loginlogout_subnet"] = array("string");
-$meta["closedwiki"]            = array("onoff");
 

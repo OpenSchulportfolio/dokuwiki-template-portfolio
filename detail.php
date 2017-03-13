@@ -9,30 +9,30 @@
 
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
-@require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
 
-$showSidebar = $conf['sidebar'] && page_exists($conf['sidebar']) && ($ACT=='show');
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>"
- lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>">
+// include template functions for osp mod
+require_once("mod/php/functions.php");
+
+?><!DOCTYPE html>
+<html lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
     <title>
         <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG))?>
         [<?php echo strip_tags($conf['title'])?>]
     </title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders()?>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-    <?php _tpl_include('meta.html') ?>
+    <?php tpl_includeFile('meta.html') ?>
 </head>
 
 <body>
     <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="dokuwiki__site"><div id="dokuwiki__top"
-        class="dokuwiki site mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
+        class="dokuwiki site mode_<?php echo $ACT ?>">
 
         <?php include('tpl_header.php') ?>
 
@@ -47,7 +47,7 @@ $showSidebar = $conf['sidebar'] && page_exists($conf['sidebar']) && ($ACT=='show
 
                 <div class="page group">
                     <?php tpl_flush() ?>
-                    <?php _tpl_include('pageheader.html') ?>
+                    <?php tpl_includeFile('pageheader.html') ?>
                     <!-- detail start -->
                     <?php
                     if($ERROR):
@@ -95,7 +95,7 @@ $showSidebar = $conf['sidebar'] && page_exists($conf['sidebar']) && ($ACT=='show
                     <?php endif; ?>
                 </div>
                 <!-- detail stop -->
-                <?php _tpl_include('pagefooter.html') ?>
+                <?php tpl_includeFile('pagefooter.html') ?>
                 <?php tpl_flush() ?>
 
                 <?php /* doesn't make sense like this; @todo: maybe add tpl_imginfo()?

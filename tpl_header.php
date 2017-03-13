@@ -1,30 +1,39 @@
+<?php
+/**
+ * Template header, included in the main and detail files
+ */
+
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+?>
+
 <!-- ********** HEADER ********** -->
 <div id="dokuwiki__header"><div class="pad group">
 
-    <?php html_msgarea() ?>
-    <?php _tpl_include('header.html') ?>
+    <?php tpl_includeFile('header.html') ?>
 
     <div class="headings group">
         <ul class="a11y skip">
             <li><a href="#dokuwiki__content"><?php echo $lang['skip_to_content']; ?></a></li>
         </ul>
-        <div id="sitelogo">
-        <?php _osp_get_logopic() ?>
-        </div>
-        <div id="titlebox">
+
         <h1><?php
+            // get logo either out of the template images folder or data/media folder
+            $logoSize = array();
+            $logo = tpl_getMediaFile(array(':wiki:logo.png', ':wiki:logo:logo.png', 'images/logo.png' ), false, $logoSize);
+
+            // display logo and wiki title in a link to the home page
             tpl_link(
                 wl(),
-                '<span>'.tpl_getConf('sitetitle').'</span>',
+                '<img src="'.$logo.'" '.$logoSize[3].' alt="" /> <span id="sitetitle">'.tpl_getConf('sitetitle').'</span><span id="schoolname">'.tpl_getConf('schoolname').'</span>',
                 'accesskey="h" title="[H]"'
             );
         ?></h1>
-        <?php if (tpl_getConf('schoolname')): ?>
-            <p class="claim"><?php echo tpl_getConf('schoolname'); ?></p>
+        <?php if ($conf['tagline']): ?>
+            <p class="claim"><?php echo $conf['tagline']; ?></p>
         <?php endif ?>
-        </div>
     </div>
-
+    <?php if( $_SERVER['REMOTE_USER'] || ! tpl_getConf('closedwiki') ): ?>
     <div class="tools group">
         <!-- USER TOOLS -->
         <?php if ($conf['useacl']): ?>
@@ -34,13 +43,13 @@
                     <?php
                         if ($_SERVER['REMOTE_USER']) {
                             echo '<li class="user">';
-                            tpl_userinfo(); /* 'Logged in as ...' */
+                            tpl_portfolio2_userinfo(); /* 'Logged in as ...' */
                             echo '</li>';
                         }
                         tpl_action('admin', 1, 'li');
                         tpl_action('profile', 1, 'li');
                         tpl_action('register', 1, 'li');
-                        tpl_action('login', 1, 'li');
+                        tpl_portfolio2_login();
                     ?>
                 </ul>
             </div>
@@ -49,11 +58,10 @@
         <!-- SITE TOOLS -->
         <div id="dokuwiki__sitetools">
             <h3 class="a11y"><?php echo $lang['site_tools']; ?></h3>
-            <?php tpl_searchform(); ?>
+            <?php tpl_portfolio2_selectsearchbox(); ?>
             <div class="mobileTools">
                 <?php tpl_actiondropdown($lang['tools']); ?>
             </div>
-            <?php if (tpl_getConf('toolstopleft')): ?>
             <ul>
                 <?php
                     tpl_action('recent', 1, 'li');
@@ -61,11 +69,9 @@
                     tpl_action('index', 1, 'li');
                 ?>
             </ul>
-            <?php endif ?>
         </div>
 
     </div>
-
-
+    <?php endif ?>
     <hr class="a11y" />
 </div></div><!-- /header -->

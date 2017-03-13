@@ -1,45 +1,49 @@
 <?php
 /**
- * OpenSchulportfolio ("osp") Template
- * Based on "Dokuwiki Template 2012"
+ * DokuWiki Default Template 2012
  *
  * @link     http://dokuwiki.org/template
  * @author   Anika Henke <anika@selfthinker.org>
  * @author   Clarence Lee <clarencedglee@gmail.com>
- * @author   Frank Schiebel <frank@linuxmuster.net>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
 if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 
-@require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
-@require_once(dirname(__FILE__).'/mod/osp_functions.php'); /* include hook for osp specific template functions */
+// include template functions for osp mod
+require_once("mod/php/functions.php");
 
+//get needed language array
+include DOKU_TPLINC."lang/en/lang.php";
+$tpl_language = DOKU_TPLINC."/lang/".$conf["lang"]."/lang.php";
+if (!empty($conf["lang"]) && $conf["lang"] !== "en" && file_exists($tpl_language)){
+        include $tpl_language;
+}
 
-
-
-$showSidebar = $conf['sidebar'] && page_exists($conf['sidebar']) && ($ACT=='show');
-$showSidebar = true;
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
-  lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>">
+$hasSidebar = page_findnearest($conf['sidebar']);
+if ( ! $hasSidebar && page_exists(tpl_getConf('sidebar_page'))) {
+    $hasSidebar = tpl_getConf('sidebar_page');
+}
+$showSidebar = $hasSidebar && ($ACT=='show');
+?><!DOCTYPE html>
+<html lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
     <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <?php tpl_metaheaders() ?>
-    <?php _osp_csslink() ?>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-    <?php _tpl_include('meta.html') ?>
+    <?php tpl_includeFile('meta.html') ?>
+    <?php tpl_portfolio2_css() ?>
 </head>
 
-<body <?php if ($ACT != "") { echo "class=\"". $ACT ."\""; } ?>>
+<body>
     <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="dokuwiki__site"><div id="dokuwiki__top"
-        class="dokuwiki site mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
+        class="dokuwiki site mode_<?php echo $ACT ?> <?php echo ($showSidebar) ? 'showSidebar' : '';
+        ?> <?php echo ($hasSidebar) ? 'hasSidebar' : ''; ?>">
 
         <?php include('tpl_header.php') ?>
 
@@ -48,47 +52,45 @@ $showSidebar = true;
             <?php if($showSidebar): ?>
                 <!-- ********** ASIDE ********** -->
                 <div id="dokuwiki__aside"><div class="pad include group">
-                    <?php tpl_flush() ?>
-                    <?php _tpl_include('sidebarheader.html') ?>
-                    <?php _osp_sidebar() ?>
-                    <?php _tpl_include('sidebarfooter.html') ?>
+                    <h3 class="toggle"><?php echo $lang['sidebar'] ?></h3>
+                    <div class="content">
+                        <?php tpl_flush() ?>
+                        <?php tpl_includeFile('sidebarheader.html') ?>
+                        <?php tpl_portfolio2_boxes($hasSidebar) ?>
+                        <?php tpl_includeFile('sidebarfooter.html') ?>
+                    </div>
                 </div></div><!-- /aside -->
             <?php endif; ?>
 
             <!-- ********** CONTENT ********** -->
             <div id="dokuwiki__content"><div class="pad group">
+
+            <?php if( ! tpl_getConf('closedwiki') || $_SERVER['REMOTE_USER'] ): ?>
+                <div class="pageId"><span>&nbsp;[[<?php echo hsc($ID) ?>]]&nbsp;</span></div>
+            <?php endif ?>
                 <div class="page group">
-                    <div id="topbar">
-                        <?php _osp_topbar(); ?>
+                    <?php tpl_flush() ?>
+                    <?php tpl_includeFile('pageheader.html') ?>
+                    <?php tpl_portfolio2_topbar() ?>
+                    <!-- wikipage start -->
+                    <div id="innercontent">
+                    <?php tpl_content() ?>
                     </div>
-                    <div id="sitenotice">
-                        <?php
-                            $html = _osp_show_sitenotice();
-                            echo $html;
-                            tpl_flush();
-                        ?>
-                    </div>
-                    <?php if($conf['youarehere']): ?>
-                        <div class="youarehere"><?php tpl_youarehere() ?></div>
+                    <?php if( ! tpl_getConf('closedwiki') || $_SERVER['REMOTE_USER'] ): ?>
+                    <?php tpl_portfolio2_breadcrumbs() ?>
                     <?php endif ?>
-                    <div class="content">
-                        <?php tpl_flush() ?>
-                        <?php _tpl_include('pageheader.html') ?>
-                        <!-- wikipage start -->
-                        <?php tpl_content() ?>
-                        <!-- wikipage stop -->
-                        <?php _tpl_include('pagefooter.html') ?>
-                    </div>
+                    <!-- wikipage stop -->
+                    <?php tpl_includeFile('pagefooter.html') ?>
                 </div>
 
-                <div class="docInfo"><?php tpl_pageinfo() ?></div>
-
+                <div class="docInfo"><span>&nbsp;[[<?php echo hsc($ID) ?>]]&nbsp;</span><?php tpl_pageinfo() ?></div>
                 <?php tpl_flush() ?>
             </div></div><!-- /content -->
 
             <hr class="a11y" />
 
             <!-- PAGE ACTIONS -->
+            <?php if( ! tpl_getConf('closedwiki') || $_SERVER['REMOTE_USER'] ): ?>
             <div id="dokuwiki__pagetools">
                 <h3 class="a11y"><?php echo $lang['page_tools']; ?></h3>
                 <div class="tools">
@@ -104,6 +106,7 @@ $showSidebar = true;
                     </ul>
                 </div>
             </div>
+            <?php endif ?>
         </div><!-- /wrapper -->
 
         <?php include('tpl_footer.php') ?>
