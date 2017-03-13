@@ -1,0 +1,174 @@
+#dokuwiki__header h1 span {
+    display: block;
+    padding:0;
+    margin:0;
+}
+
+div.topmenu {
+    overflow: hidden;
+    text-align:center;
+}
+div.topmenu div#menu {
+    width: 100%;
+    overflow:hidden;
+}
+
+.dokuwiki div.breadcrumbs {
+    border:0 !important;
+}
+
+.dokuwiki div.page {
+    padding: 0 !important;
+}
+
+.dokuwiki .pageId {
+    top: -2.05em;
+}
+.dokuwiki div.pageId span {
+    font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Liberation Mono",Monaco,"Courier New",monospace;
+    font-size: 70%;
+}
+
+#dokuwiki__aside h1 {
+    box-shadow: 0 0 2px #999999;
+    color: #555555;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 3px 1px 5px 5px;
+    margin:3px 3px 0.5em 3px;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    border: 1px solid #eee;
+}
+
+#dokuwiki__aside h2 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-left: 4px;
+    color: #888;
+    text-shadow: 1px 1px 0 #FFFFFF;
+}
+
+#dokuwiki__aside #ospversionpic {
+    background: url("mod/img/ospversion.png") no-repeat scroll center top transparent;
+    height: 45px;
+    margin-top: 40px;
+}
+#dokuwiki__aside #ospversion {
+    font-size: 80%;
+    color: #ccc;
+    text-align: center;
+}
+div.youarehere {
+    margin: 0 2px 0 2px;
+    border: 1px solid #dedede !important;
+}
+#dw__toc {
+    margin-right: -1.5em;
+    margin-top: 0;
+}
+
+
+/* topbar */
+div#topbar {
+    height: 2.6em;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 7px;
+    background-color: __css_barcolor__;
+    color: #555;
+    text-shadow: 1px 1px 0 #fff;
+}
+div#topbar ul {
+    list-style: none;
+    text-indent: none;
+    padding:0;
+    margin:0;
+}
+
+div#topbar ul.topbar-left {
+    float: left;
+    margin-left:1em;
+}
+
+div#topbar ul.topbar-right {
+    float: right;
+    margin-right:1em;
+}
+
+div#topbar ul li {
+    float:left;
+    padding:0.7em 0.7em 0.5em 0.7em;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    margin:0;
+}
+div#topbar ul li.infomail {
+    padding:0.64em 0.5em 0em 0.5em;
+}
+
+div#topbar form input.button {
+    background: none repeat scroll 0 0 transparent;
+    border: 0;
+    color: #555;
+    text-shadow: 1px 1px 0 #fff;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+div#topbar ul li a {
+    color: #555;
+}
+div#topbar ul li.active {
+    color: #000;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+#innercontent {
+    padding: 0.7em 2em 2em 2em;
+}
+
+
+div.include_edit a.editlink {
+    float: right;
+    position: relative;
+    top: -2em;
+    display: none;
+    margin: 0 5px 0 0;
+    color: #555 !important;
+}
+
+div.include_edit:hover a.editlink {
+display: inline;
+    height:0px;
+}
+
+
+
+#mediamanager__page dl dd {
+    background: transparent;
+}
+
+pre {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 0.5em #CCCCCC inset;
+    overflow: auto;
+    padding: 0.7em 1em;
+    word-wrap: normal;
+}
+
+.img_detail dd, .img_detail dt {
+    background: transparent !important;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+div#dokuwiki__detail div#dokuwiki__content div.page {
+    padding: 1em !important;
+}
+
+
