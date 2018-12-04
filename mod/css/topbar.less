@@ -1,0 +1,48 @@
+#osp__topbar {
+  margin-top: -1.556em;
+  margin-left: -2em;
+  margin-right: -2em;
+
+  height: 2.6em;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 7px;
+  background-color: @ini_theme_color;
+  color: #555;
+  text-shadow: 1px 1px 0 #fff;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.topbar-left {
+      float: left;
+      margin-left: 1em;
+    }
+
+    &.topbar-right {
+      float: right;
+      margin-right: 1em;
+    }
+
+
+    li {
+      float: left;
+      padding: 0.7em 0.7em 0.5em 0.7em;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+      margin: 0;
+
+      a {
+        color: #555;
+      }
+    }
+  }
+}
+
+// no top bar in mobile
+@media only screen and (max-width: @ini_tablet_width) {
+  #osp__topbar {
+    display: none;
+  }
+}

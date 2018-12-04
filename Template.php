@@ -67,7 +67,7 @@ class Template
         }
 
 
-        echo '<div id="topbar">';
+        echo '<div id="osp__topbar">';
 
         // plugin actions
         echo '<ul class="topbar-left">';
@@ -147,7 +147,7 @@ class Template
         global $conf;
         $conf['breadcrumbs'] = $this->breadcrumbs;
 
-        echo '<div class="breadcrumbs">';
+        echo '<div class="breadcrumbs bottom">';
         echo '<div class="youarehere">';
         tpl_breadcrumbs();
         echo '</div>';
