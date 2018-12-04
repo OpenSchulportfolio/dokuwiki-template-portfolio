@@ -49,8 +49,8 @@ class Template
      */
     public function sidebarfooter()
     {
-        $this->boxExport();
-        $this->boxTools();
+        if (tpl_getConf('exportbox')) $this->boxExport();
+        if (tpl_getConf('toolbox')) $this->boxTools();
     }
 
     /*

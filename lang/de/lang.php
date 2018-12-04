@@ -1,14 +1,5 @@
 <?php
-//check if we are running within the DokuWiki environment
-if (!defined("DOKU_INC")){
-    die();
-}
-
 $lang["edit_include"] = "Bearbeiten";
-$lang["readpage"] = "Lesen";
-$lang["readpage_tooltip"] = "Die aktuelle Wiki-Seite anzeigen";
-$lang["discussion"] = "Diskussion";
-$lang["discussion_tooltip"] = "Diskussion zur aktuellen Wiki-Seite";
 
 //exportbox ("print/export")
 $lang["export_headline"] = "Druck/Export";
