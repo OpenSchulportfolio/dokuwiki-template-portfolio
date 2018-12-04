@@ -44,6 +44,14 @@ class Template
         $this->bottomBreadcrumbs();
     }
 
+    /**
+     * Called from the sidebarfooter include
+     */
+    public function sidebarfooter()
+    {
+        $this->boxExport();
+        $this->boxTools();
+    }
 
     /*
      * display the top action bar
@@ -146,5 +154,111 @@ class Template
         print '</div>';
 
         $conf['breadcrumbs'] = 0;
+    }
+
+    /**
+     * Display links to export the current page
+     *
+     * @todo handle open in new window
+     * @todo check problems with book creator: addtobook no longer supported!
+     */
+    protected function boxExport()
+    {
+        global $ID;
+
+        echo '<div class="osp_box">';
+        echo '<h1>' . tpl_getLang('export_headline') . '</h1>';
+        echo '<ul>';
+
+        //ODT plugin see <http://www.dokuwiki.org/plugin:odt> for info
+        if (file_exists(DOKU_PLUGIN . 'odt/syntax.php') && !plugin_isdisabled('odt')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'export_odt']) . '" rel="nofollow">' . tpl_getLang('export_odt') . '</a>';
+            echo '</div></li>';
+        }
+
+        //dw2pdf plugin see <http://www.dokuwiki.org/plugin:dw2pdf> for info
+        if (file_exists(DOKU_PLUGIN . 'dw2pdf/action.php') && !plugin_isdisabled('dw2pdf')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'export_pdf']) . '" rel="nofollow">' . tpl_getLang('export_pdf') . '</a>';
+            echo '</div></li>';
+        }
+
+        //s5 plugin see <http://www.dokuwiki.org/plugin:s5> for info
+        if (file_exists(DOKU_PLUGIN . 's5/syntax.php') && !plugin_isdisabled('s5')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'export_s5']) . '" rel="nofollow">' . tpl_getLang('export_s5') . '</a>';
+            echo '</div></li>';
+        }
+
+        //bookcreator plugin
+        if (file_exists(DOKU_PLUGIN . 'bookcreator/syntax.php') && !plugin_isdisabled('bookcreator')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'addtobook']) . '" rel="nofollow">' . tpl_getLang('export_book') . '</a>';
+            echo '</div></li>';
+        }
+
+        // "print" view
+        echo '<li><div class="li">';
+        echo '<a href="' . wl($ID, ['do' => 'export_html']) . '" rel="nofollow">' . tpl_getLang('export_print') . '</a>';
+        echo '</div></li>';
+
+        echo '</ul>';
+        echo '</div>';
+    }
+
+    /**
+     * Print some tools in a sidebar box
+     */
+    protected function boxTools()
+    {
+        global $ID;
+        global $lang;
+
+        echo '<div class="osp_box">';
+        echo '<h1>' . tpl_getLang('tools_headline') . '</h1>';
+        echo '<ul>';
+
+        if (actionOK('backlink')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'backlink']) . '" rel="nofollow">' . tpl_getLang('tools_backlinks') . '</a>';
+            echo '</div></li>';
+        }
+
+        if (actionOK('recent')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'recent']) . '" rel="nofollow">' . $lang['btn_recent'] . '</a>';
+            echo '</div></li>';
+        }
+
+        if (actionOK('media')) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'media', 'ns' => getNS($ID)]) . '" rel="nofollow">' . tpl_getLang('tools_upload') . '</a>';
+            echo '</div></li>';
+        }
+
+        if (actionOK("index")) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl($ID, ['do' => 'index']) . '" rel="nofollow">' . tpl_getLang('tools_siteindex') . '</a>';
+            echo '</div></li>';
+        }
+
+        if (auth_quickaclcheck('wiki:ebook') >= AUTH_READ) {
+            echo '<li><div class="li">';
+            echo '<a href="' . wl('wiki:ebook') . '" rel="nofollow">' . tpl_getLang('tools_bookselection') . '</a>';
+            echo '</div></li>';
+        }
+
+        //shorturl plugin
+        /** @var \helper_plugin_shorturl $plugin */
+        $plugin = plugin_load('helper', 'shorturl');
+        if (!plugin_isdisabled("shorturl") && auth_quickaclcheck($ID) >= AUTH_READ) {
+            echo '<li><div class="li">';
+            echo $plugin->shorturlPrintLink($ID);
+            echo '</div></li>';
+        }
+
+        echo '</ul>';
+        echo '</div>';
     }
 }
