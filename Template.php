@@ -154,20 +154,17 @@ class Template
      */
     protected function topMenu()
     {
-        $topMenu = tpl_getConf('topmenu_page');
+        $topMenu = trim(tpl_getConf('topmenu_page'));
+        if($topMenu === '') return;
         if (!page_exists($topMenu)) return;
 
-        echo '<div class="topmenu content">';
-        echo '<div class="include_edit">';
-
+        echo '<div class="osp_topmenu content">';
         tpl_include_page($topMenu, 1, 1);
 
         if (auth_quickaclcheck($topMenu) > AUTH_READ) {
             $link = wl($topMenu, array("do" => "edit"));
             echo '<a href="' . $link . '" class="editlink">' . tpl_getLang('edit_include') . '</a>';
         }
-
-        echo '</div>';
         echo '</div>';
     }
 
