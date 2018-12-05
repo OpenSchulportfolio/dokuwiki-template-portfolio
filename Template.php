@@ -123,17 +123,23 @@ class Template
         // plugin actions
         echo '<ul class="topbar-left">';
         if ($INPUT->server->has('REMOTE_USER')) {
-            // info mail
-            $plugin = plugin_load('action', 'infomail');
+            /** @var \helper_plugin_infomail $plugin */
+            $plugin = plugin_load('helper', 'infomail');
             if ($plugin) {
-                echo '<li>Infomail FIXME</li>';
+                $link = $plugin->getLink();
+                $link['attr']['class'] .= ' action';
+                echo '<li><a ' . buildAttributes($link['attr']) . '>'
+                    . $link['text'] . '</a></li>';
             }
 
             /** @var \syntax_plugin_talkpage $plugin */
             $plugin = plugin_load('syntax', 'talkpage');
-            $link = $plugin->getLink();
-            echo '<li><a href="' . wl($link['goto']) . '" ' . buildAttributes($link['attr']) .
-                ' class="action talkpage">' . $link['text'] . '</a></li>';
+            if ($plugin) {
+                $link = $plugin->getLink();
+                $link['attr']['class'] .= ' action';
+                echo '<li><a ' . buildAttributes($link['attr']) . '>'
+                    . $link['text'] . '</a></li>';
+            }
         }
         echo '</ul>';
 
@@ -155,7 +161,7 @@ class Template
     protected function topMenu()
     {
         $topMenu = trim(tpl_getConf('topmenu_page'));
-        if($topMenu === '') return;
+        if ($topMenu === '') return;
         if (!page_exists($topMenu)) return;
 
         echo '<div class="osp_topmenu content">';
