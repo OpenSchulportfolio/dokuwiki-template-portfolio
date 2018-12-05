@@ -9,14 +9,16 @@ This is the template for the OpenSchulPortfolio project. This is version 3 of th
 * `exportbox`: allows you to diable the export section in the sidebar
 * `toolbox`: allows you to diable the tools section in the sidebar
 
+Please also see infos on [customization](https://www.dokuwiki.org/template:dokuwiki#customizing) for the `dokuwiki` template.
+
 ## Differences to v2
 
 When you upgrade from an older version, you will notice that the configuration options have been greatly reduced. However most of the functionality is still there. Here is how the old config settings are correspondent to the new way of doing things.
 
 * `sitetitle`: use DokuWiki's standard `title` setting
 * `schoolname`: use DokuWiki's standard `tagline` setting
-* `userpage`: FIXME
-* `userpage_ns`: FIXME
+* `userpage`: use DokuWiki's `showuseras` setting and select "full name + user link"
+* `userpage_ns`: configure the `user` interwiki link
 * `infomail`: disable or uninstall the `infopage` plugin to disable this
 * `discuss`: disable or uninstall the `talkpage` plugin to disable this
 * `discuss_ns`: configure the `talkpage` plugin instead
