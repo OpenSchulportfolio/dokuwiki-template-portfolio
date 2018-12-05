@@ -11,15 +11,27 @@ class Template
     protected $breadcrumbs;
     protected $youarehere;
 
+    /**
+     * Template constructor.
+     *
+     * This initializes everything right before the template begins to output stuff. It's the last
+     * chance for registering events etc.
+     */
     public function __construct()
     {
         global $conf;
+        /** @var \Doku_Event_Handler $EVENT_HANDLER */
+        global $EVENT_HANDLER;
 
         // disable default output of breadcumbs (we do it ourselves later)
         $this->breadcrumbs = $conf['breadcrumbs'];
         $this->youarehere = $conf['youarehere'];
         $conf['breadcrumbs'] = 0;
         $conf['youarehere'] = 0;
+
+        // initialize the wiki state
+        $EVENT_HANDLER->register_hook('MENU_ITEMS_ASSEMBLY', 'AFTER', $this, 'menuAssembly');
+        $this->disableFeaturesOnClose();
     }
 
     /**
@@ -27,6 +39,8 @@ class Template
      */
     public function pageheader()
     {
+        if ($this->isClosed()) return;
+
         global $ACT;
 
         $this->topActionBar();
@@ -41,6 +55,8 @@ class Template
      */
     public function pagefooter()
     {
+        if ($this->isClosed()) return;
+
         $this->bottomBreadcrumbs();
     }
 
@@ -53,19 +69,54 @@ class Template
         if (tpl_getConf('toolbox')) $this->boxTools();
     }
 
+    /**
+     * Handle the menu assembly event
+     *
+     * @param \Doku_Event $event
+     * @return bool
+     */
+    public function menuAssembly(\Doku_Event $event)
+    {
+        // we want absolutely no menu items
+        if ($this->isClosed()) {
+            $event->data['items'] = [];
+            $event->stopPropagation();
+        }
+
+        return true;
+    }
+
+    /**
+     * We disable stuff when the wiki is closed
+     */
+    protected function disableFeaturesOnClose()
+    {
+        global $conf;
+        if (!$this->isClosed()) return;
+
+        $conf['disableactions'] .= ',search';
+    }
+
+    /**
+     * Check if all utils should be closed because no user available
+     *
+     * @return bool
+     */
+    protected function isClosed()
+    {
+        global $INPUT;
+        if (tpl_getConf('closedwiki') && !$INPUT->server->has('REMOTE_USER')) {
+            return true;
+        }
+        return false;
+    }
+
     /*
      * display the top action bar
      */
     protected function topActionBar()
     {
         global $INPUT;
-
-        // no top bar for anonymous users on closed wikis
-        if (tpl_getConf('closedwiki') && !$INPUT->server->has('REMOTE_USER')) {
-            echo '<br />';
-            return;
-        }
-
 
         echo '<div id="osp__topbar">';
 
