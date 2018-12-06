@@ -9,4 +9,5 @@
 $lang["closedwiki"] = "Should navigation and page tools be hidden when no user is logged in?";
 $lang["topmenu_page"] = "Page to be included as topmenu";
 $lang["exportbox"] = "Show exportbox in sidebar?"; //TRUE: use/show exportbox
+$lang["print_new_window"] = "Open print version of page in new browser-window/tab?";
 $lang["toolbox"] = "Show toolbox in sidebar?"; //TRUE: use/show toolbox

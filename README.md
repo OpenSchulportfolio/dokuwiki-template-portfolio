@@ -7,6 +7,7 @@ This is the template for the OpenSchulPortfolio project. This is version 3 of th
 * `closedwiki`: will remove all wiki functionality from the interface when a user is not logged in
 * `topmenu_page`: the page to be included as top navigation
 * `exportbox`: allows you to diable the export section in the sidebar
+* `print_new_window`: open the print view in a new tab
 * `toolbox`: allows you to diable the tools section in the sidebar
 
 Please also see infos on [customization](https://www.dokuwiki.org/template:dokuwiki#customizing) for the `dokuwiki` template.
@@ -25,7 +26,6 @@ When you upgrade from an older version, you will notice that the configuration o
 * `topmenu`: just empty the `topmenu_page` configuration or delete the page
 * `sidebar`: use DokuWiki's builtin sidebar support
 * `sidebar_page`: use DokuWiki's standard `sidebar` setting
-* `print_new_window`: FIXME
 * `winML*`: The "Windows Musterlösung" single sign on mechanism is obsolete and no longer supported
 
  

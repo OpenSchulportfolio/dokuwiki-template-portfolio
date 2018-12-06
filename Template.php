@@ -213,7 +213,6 @@ class Template
     /**
      * Display links to export the current page
      *
-     * @todo handle open in new window
      * @todo check problems with book creator: addtobook no longer supported!
      */
     protected function boxExport()
@@ -253,8 +252,13 @@ class Template
         }
 
         // "print" view
+        if (tpl_getConf('print_new_window')) {
+            $new = 'target="_blank"';
+        } else {
+            $new = '';
+        }
         echo '<li><div class="li">';
-        echo '<a href="' . wl($ID, ['do' => 'export_html']) . '" rel="nofollow">' . tpl_getLang('export_print') . '</a>';
+        echo '<a href="' . wl($ID, ['do' => 'export_html']) . '" rel="nofollow" ' . $new . '>' . tpl_getLang('export_print') . '</a>';
         echo '</div></li>';
 
         echo '</ul>';
