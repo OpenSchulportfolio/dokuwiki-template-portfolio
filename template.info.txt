@@ -1,7 +1,7 @@
 ﻿base     portfolio2
-author   Andreas Gohr, Frank Schiebel
+author   Frank Schiebel
 email    frank@linuxmuster.net
-date     2018-12-05
+date     2018-12-06
 name     OpenSchulPortfolio Template
 desc     OSP template based on DokuWiki's default template
 url      http://www.openschulportfolio.de

@@ -26,6 +26,21 @@ When you upgrade from an older version, you will notice that the configuration o
 * `sidebar`: use DokuWiki's builtin sidebar support
 * `sidebar_page`: use DokuWiki's standard `sidebar` setting
 * `print_new_window`: FIXME
-* `winML*`: FIXME
+* `winML*`: The "Windows Musterlösung" single sign on mechanism is obsolete and no longer supported
 
  
+## License
+
+Copyright (C) Frank Schiebel <frank@linuxmuster.net>, 
+              Andreas Gohr <dokuwiki@cosmocode.de>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; version 2 of the License
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+See the COPYING file in your DokuWiki folder for detail
