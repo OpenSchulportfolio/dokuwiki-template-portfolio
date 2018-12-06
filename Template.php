@@ -212,8 +212,6 @@ class Template
 
     /**
      * Display links to export the current page
-     *
-     * @todo check problems with book creator: addtobook no longer supported!
      */
     protected function boxExport()
     {
@@ -247,7 +245,8 @@ class Template
         //bookcreator plugin
         if (file_exists(DOKU_PLUGIN . 'bookcreator/syntax.php') && !plugin_isdisabled('bookcreator')) {
             echo '<li><div class="li">';
-            echo '<a href="' . wl($ID, ['do' => 'addtobook']) . '" rel="nofollow">' . tpl_getLang('export_book') . '</a>';
+            echo '<a href="' . wl($ID, ['do' => 'plugin_bookcreator__addtobook']) . '" rel="nofollow" 
+                class="plugin_bookcreator_addtobook">' . tpl_getLang('export_book') . '</a>';
             echo '</div></li>';
         }
 
