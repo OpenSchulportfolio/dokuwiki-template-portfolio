@@ -1,0 +1,49 @@
+/* page id in color with different font and moved to the right */
+.dokuwiki .pageId {
+  top: -2.05em;
+
+  span {
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Bitstream Vera Sans Mono", "Liberation Mono", Monaco, "Courier New", monospace;
+    font-size: 70%;
+    background-color: @ini_theme_color;
+    color: #555;
+
+    &::before {
+      content: '[[';
+    }
+
+    &::after {
+      content: ']]';
+    }
+  }
+}
+
+/* TOC repositioned */
+#dw__toc {
+  margin-right: -1.5em;
+  margin-top: 0;
+}
+
+/* Breadcrumbs */
+.dokuwiki div.breadcrumbs {
+  border: 0;
+  margin-left: -2em;
+  margin-right: -2em;
+
+  &.bottom {
+    margin-top: 2em;
+    margin-bottom: -1em;
+  }
+
+  div.youarehere {
+    margin: 0 2px 0 2px;
+    border: 1px solid @ini_border;
+  }
+}
+
+@media only screen and (max-width: @ini_tablet_width) {
+  .dokuwiki div.breadcrumbs {
+    display: none;
+  }
+}
+
