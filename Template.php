@@ -1,6 +1,6 @@
 <?php
 
-namespace dokuwiki\template\osp;
+namespace dokuwiki\template\portfolio2;
 
 use dokuwiki\Menu\Item\Edit;
 use dokuwiki\Menu\Item\Revisions;
