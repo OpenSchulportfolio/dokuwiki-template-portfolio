@@ -116,7 +116,8 @@ class Template
      */
     protected function topActionBar()
     {
-        global $INPUT;
+	global $INPUT;
+	global $conf
 
         echo '<div id="osp__topbar">';
 
@@ -134,7 +135,7 @@ class Template
 
             /** @var \syntax_plugin_talkpage $plugin */
             $plugin = plugin_load('syntax', 'talkpage');
-            if ($plugin) {
+            if ($plugin && $conf['plugin']['talkpage']['showbutton'] == 1 ) {
                 $link = $plugin->getLink();
                 $link['attr']['class'] .= ' action';
                 echo '<li><a ' . buildAttributes($link['attr']) . '>'
