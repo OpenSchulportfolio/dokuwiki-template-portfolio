@@ -117,7 +117,7 @@ class Template
     protected function topActionBar()
     {
 	global $INPUT;
-	global $conf
+	global $conf;
 
         echo '<div id="osp__topbar">';
 
