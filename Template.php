@@ -67,6 +67,7 @@ class Template
     {
         if (tpl_getConf('exportbox')) $this->boxExport();
         if (tpl_getConf('toolbox')) $this->boxTools();
+        include("version.php");
     }
 
     /**
