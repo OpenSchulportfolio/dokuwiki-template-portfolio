@@ -26,6 +26,7 @@ class Template
         // disable default output of breadcumbs (we do it ourselves later)
         $this->breadcrumbs = $conf['breadcrumbs'];
         $this->youarehere = $conf['youarehere'];
+        $this->disabledactions = $conf['disableactions'];
         $conf['breadcrumbs'] = 0;
         $conf['youarehere'] = 0;
 
@@ -146,9 +147,12 @@ class Template
         echo '</ul>';
 
         // page actions
+
         echo '<ul class="topbar-right">';
+        if ( ! strpos($this->disabledactions,"source") ) {
         $edit = new Edit();
-        echo '<li>' . $edit->asHtmlLink('action ', false) . '</li>';
+            echo '<li>' . $edit->asHtmlLink('action ', false) . '</li>';
+        }
         $revs = new Revisions();
         echo '<li>' . $revs->asHtmlLink('action ', false) . '</li>';
         echo '</ul>';
